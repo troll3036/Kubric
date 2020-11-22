@@ -16,6 +16,15 @@ def predict_price(area) -> float:
     You can run this program from the command line using `python3 regression.py`.
     """
     response = requests.get(TRAIN_DATA_URL)
+    x = response[0]
+    y = response[1]
+    mean_x = sum(x)/len(x)
+    mean_y = sum(y)/len(y)
+    b1 = (sum(x*y) - n*mean_x*mean_y)/(sum(x**2) - n*(mean_x**2))
+    b0 = mean_y - b1*mean_x
+    pred_y = b0 + b1*x
+    
+    return pred_y
     # YOUR IMPLEMENTATION HERE
     ...
 
